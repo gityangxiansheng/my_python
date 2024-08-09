@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="{{ url_for('login') }}" method="post">
+        <label>账号</label>
+        <input type="text" placeholder="账号" name="账号">
+        <label>密码</label>
+        <input type="text" placeholder="密码" name="密码">
+        <button type="sudmit">ok</button>
+    </form>
+
+</body>
+
+</html>
