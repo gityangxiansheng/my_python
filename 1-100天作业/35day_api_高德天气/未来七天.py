@@ -36,7 +36,7 @@ def to_email(body, subject, data_email):
 ss = {
     "lat":34.83961588746689,
     "lon":113.93433316635135,
-    "appid":"654e80f17426bdc87e9b65bb1286557c",
+    "appid":"",
     "lang":"zh_cn",
     "units":"metric",
     # "cnt":7

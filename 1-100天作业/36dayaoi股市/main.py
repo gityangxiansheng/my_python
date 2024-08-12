@@ -14,8 +14,8 @@ url = 'https://www.alphavantage.co/query'
 parameters = {
     "function":"TIME_SERIES_DAILY",
     "symbol":STOCK,
-    "interval":"1min",
-    "apikey":"RMCECXTL4EJZJCW7"
+    "interval":"",
+    "apikey":""
 }
 with open (r"C:\py4\BaiduSyncdisk\python\36day\main.json","r") as r:
 # r = requests.get(url,parameters)

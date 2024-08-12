@@ -4,9 +4,9 @@ import json
 def main():  
     ID = ""  
     urls = "https://aip.baidubce.com/rpc/2.0/nlp/v1/txt_monet"  
-    access_token = "24..2592000.1715130724.282335-60209591"  
+    access_token = 
   
-    url = f"{urls}?access_token=24.f00b69f8c7a8a6f3dd0b36fb554a6b70.2592000.1715130724.282335-60209591"  
+    url = f"{urls}?"  
   
     payload = {
     "content_list":[

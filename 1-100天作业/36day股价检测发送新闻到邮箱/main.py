@@ -158,8 +158,8 @@ print(cha)
 #昨天今天的差是：che 相关性排序三个新闻是xinwen
 def to_email(body, subject, data_email):  
     # 从环境变量或配置文件中获取敏感信息  
-    email_password = 'IKFSWVKUDSZWEMDB'
-    sender_email = "cn_xinqingnian@163.com"  
+    email_password = ''
+    sender_email = "@163.com"  
     smtp_server = "smtp.163.com"  
     smtp_port = 465  
   
@@ -180,7 +180,7 @@ def to_email(body, subject, data_email):
             
 body= f"根据相关度排序新闻！\n{xinwen[0]}\n\n\n{xinwen[1]}\n\n\n{xinwen[2]}"
 subject= f"特斯拉股值相较昨日{cha}"
-to_email(body=body,subject=subject,data_email="1264643521@qq.com")
+to_email(body=body,subject=subject,data_email="@qq.com")
 
 
 
