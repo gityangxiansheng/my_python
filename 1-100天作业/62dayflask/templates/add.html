@@ -10,8 +10,52 @@
       <h1>Add a new cafe into the database</h1>
 
       <!-- This is where your WTForm will go -->
+      <form method="post">
+        {{ form.csrf_token }}
+        <div>{{ form.cafeme.label }}</div>
+        <div>{{ form.cafeme }}</div>
 
-	  <p class="space-above"><a href="#">See all cafes</a></p>
+        <div>{{ form.location.label }}</div>
+        <div>{{ form.location }}</div>
+        {% if form.location.errors %}
+        {% for error in form.location.errors %}
+        {{error}}
+        {% endfor %}{% endif %}
+
+
+
+        <div>{{ form.cafe_open.label }}</div>
+        <div>{{ form.cafe_open }}</div>
+
+        <div>{{ form.cafe_closs.label }}</div>
+        <div>{{ form.cafe_closs }}</div>
+
+        <div>{{ form.wifi.label }}</div>
+        <div>{{ form.wifi }}</div>
+
+        {% if form.wifi.errors %}
+        {% for error in form.wifi.errors %}
+        {{error}}
+        {% endfor %}{% endif %}
+
+
+        <div>{{ form.coffee.label }}</div>
+        <div>{{ form.coffee }}</div>
+        {% if form.coffee.errors %}
+        {% for error in form.coffee.errors %}
+        {{error}}
+        {% endfor %}{% endif %}
+
+        <div>{{ form.power.label }}</div>
+        <div>{{ form.power }}</div>
+        {% if form.power.errors %}
+        {% for error in form.ppwer.errors %}
+        {{ error }}
+        {% endfor %}{% endif %}
+
+        <div>{{ form.submit }}</div>
+      </form>
+      <p class="space-above"><a href="#">See all cafes</a></p>
 
     </div>
   </div>

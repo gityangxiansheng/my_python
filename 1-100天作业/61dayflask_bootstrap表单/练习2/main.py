@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] ='my_secret_key'  # 设置秘密密钥，用于 CSRF �
 @app.route("/",methods=["GET","POST"] )
 def home():
     form = ContactForm()
-    if form.validate_on_submit() and form.email.data == "1264643521@qq.com" and form.password.data == "12345678":
+    if form.validate_on_submit() and form.email.data == "@qq.com" and form.password.data == "12345678":
         return render_template("denied.html")
     elif form.validate_on_submit() :
         return render_template("denied.html")
