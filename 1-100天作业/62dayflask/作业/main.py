@@ -36,12 +36,12 @@ class CafeForm(FlaskForm):
         
         
     def read_csv(self):
-        csv_data = pd.read_csv(r'1-100天作业\62dayflask\cafe-data.csv',header=None)
+        csv_data = pd.read_csv(r'1-100天作业\62dayflask\作业\cafe-data.csv',header=None)
         list_of_rows = csv_data.values.tolist()
         return list_of_rows
     def write_csv(self,csv_list):
         csv_df = pd.DataFrame(csv_list)
-        csv_df.to_csv(r'1-100天作业\62dayflask\cafe-data.csv',index=False, header=None)
+        csv_df.to_csv(r'1-100天作业\62dayflask\作业\cafe-data.csv',index=False, header=None)
     def save_changes(self, csv_list):
         self.write_csv(csv_list)
 
