@@ -64,8 +64,10 @@ def add():
 
 @app.route("/edit", methods=["GET", "POST"])
 def edit():
+    print(request.args.get('id'))
     if request.method == "POST":
         #UPDATE RECORD
+        print(request.form["id"])
         book_id = request.form["id"]
         book_to_update = db.get_or_404(Book, book_id)
         book_to_update.rating = request.form["rating"]

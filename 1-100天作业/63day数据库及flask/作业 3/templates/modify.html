@@ -3,21 +3,21 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Add Book</title>
+  <title>Edit Rating</title>
 </head>
 
 <body>
-  <form action="" method="POST">
+  <form action="{{ url_for('modify')}}" method="POST">
     <div>Book Name : {{book.title}}</div>
 
     <div>Book Author : {{book.author}}</div>
 
     <div>当前评分 :{{book.rating}}</div>
-
+    <input hidden="hidden" name="id" value="{{book.id}}" />
     <div><input name="rating" type="text"> <button type="submit">Add Book</button></div>
 
   </form>
-  
+
 </body>
 
 </html>

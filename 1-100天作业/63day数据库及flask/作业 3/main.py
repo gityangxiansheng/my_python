@@ -22,7 +22,7 @@ def home():
     return render_template("index.html",all_books=all_books)\
         
 @app.route("/del/<book_id>")
-def dellt(book_id):
+def delete(book_id):
     book = Book.query.filter_by(id=book_id).first()
     print(book.title)
     db.session.delete(book)
@@ -40,17 +40,20 @@ def add():
             db.session.commit()
             return redirect(url_for('home'))
     return render_template("add.html")
-@app.route("/edit/<book_id>",methods=['GET', 'POST'])
 
 
-def modify(book_id):
-    book = Book.query.filter_by(id=book_id).first()
+@app.route("/edit",methods=['GET', 'POST'])
+def modify():
     if request.method =="POST":
         if request.form['rating']:
+            print(request.form["id"])
+            book = Book.query.filter_by(id=request.form["id"]).first()
             book.rating = request.form['rating']
             db.session.commit()
             return redirect(url_for("home"))
+    book = Book.query.filter_by(id=request.args.get('book_id')).first()
     return render_template("modify.html",book=book)
+
 
 
 
