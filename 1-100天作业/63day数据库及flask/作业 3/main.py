@@ -1,10 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-import pymysql
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = r"sqlite:///C:\Users\杨年轻\Desktop\py\1-100天作业\63day数据库及flask\作业3\books-collection.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = r"sqlite:///C:\Users\Administrator\Desktop\BaiduSyncdisk\py\1-100天作业\63day数据库及flask\作业 3\books-collection.db"
 db = SQLAlchemy(app=app)
 
 class Book(db.Model):
@@ -12,34 +11,47 @@ class Book(db.Model):
     title = db.Column(db.String(250), unique=True, nullable=False)
     author = db.Column(db.String(250), nullable=False)
     rating = db.Column(db.Float, nullable=False) 
-    
-    def serialize(self):  
-        return {  
-            'id': self.id,  
-            'title': self.title,  
-            'author': self.author,  
-            'rating': self.rating  
-        } 
-
+ 
 with app.app_context():
     db.create_all()
- 
-all_books = Book.query.all() 
-books_list = [Book.serialize() for book in all_books]  
-print(books_list)
+
 
 @app.route('/')
 def home():
-    return render_template("index.html",all_books=books_list)
-
+    all_books = Book.query.all()
+    return render_template("index.html",all_books=all_books)\
+        
+@app.route("/del/<book_id>")
+def dellt(book_id):
+    book = Book.query.filter_by(id=book_id).first()
+    print(book.title)
+    db.session.delete(book)
+    db.session.commit()
+    return redirect(url_for("home"))
+    # return  book_id
+    # return redirect("home")
 
 @app.route("/add",methods = ["GET","POST"])
 def add():
     if request.method == "POST":
-        new_book = Book(title=request.form["name"], author=request.form["authot"], rating=request.form["rating"])
-        db.session.add(new_book) 
-        db.session.commit() 
+        if request.form["name"] and request.form["author"] and request.form["rating"]:
+            new_book = Book(title=request.form["name"], author=request.form["author"], rating=request.form["rating"])
+            db.session.add(new_book)
+            db.session.commit()
+            return redirect(url_for('home'))
     return render_template("add.html")
+@app.route("/edit/<book_id>",methods=['GET', 'POST'])
+
+
+def modify(book_id):
+    book = Book.query.filter_by(id=book_id).first()
+    if request.method =="POST":
+        if request.form['rating']:
+            book.rating = request.form['rating']
+            db.session.commit()
+            return redirect(url_for("home"))
+    return render_template("modify.html",book=book)
+
 
 
 if __name__ == "__main__":

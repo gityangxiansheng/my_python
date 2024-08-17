@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Library</title>
-  </head>
-  <body>
 
-    <h1>我的图书馆</h1>
-    <ul>
-      {% if not all_books %}
-      <li>图书馆是空的</li>
-      {% else %}
-      {% for book_data in all_books %}
-      <li>{{book_data['book_name']}}-{{book_data['authot']}}-{{book_data['rating']}}</li>
-      {% endfor %}
-      {% endif %}
-    </ul>
+<head>
+  <meta charset="UTF-8" />
+  <title>Library</title>
+</head>
 
-    <a href="{{ url_for('add')}}">添加新书</a>
-  </body>
+<body>
+
+  <h1>我的图书馆</h1>
+  <ul>
+    {% if not all_books %}
+    <li>图书馆是空的</li>
+    {% else %}
+    {% for book_data in all_books %}
+    <li>
+      <a href="{{ url_for('dellt',book_id=book_data.id)}}">删除本书</a> - {{book_data.title}} -
+      {{book_data.author}} -
+      {{book_data.rating}}/10 - <a href="{{ url_for('modify',book_id=book_data.id)}}">修改评分</a>
+    </li>
+    {% endfor %}
+    {% endif %}
+  </ul>
+
+  <a href="{{ url_for('add')}}">添加新书</a>
+</body>
+
 </html>

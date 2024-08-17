@@ -28,7 +28,7 @@ def add():
     if request.method == "POST":
         new_book = {
             "book_name" : request.form["name"],
-            "authot" : request.form["authot"],
+            "authot" : request.form["author"],
             "rating" : request.form["rating"]
         }
         all_books.append(new_book)
