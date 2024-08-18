@@ -11,14 +11,19 @@ class Book(db.Model):
     title = db.Column(db.String(250), unique=True, nullable=False)
     author = db.Column(db.String(250), nullable=False)
     rating = db.Column(db.Float, nullable=False) 
- 
+    
+    
+
 with app.app_context():
     db.create_all()
+    all_books = Book.query.all() 
+    print(all_books)
+
 
 
 @app.route('/')
 def home():
-    all_books = Book.query.all()
+
     return render_template("index.html",all_books=all_books)\
         
 @app.route("/del/<book_id>")
