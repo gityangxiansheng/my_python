@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}My Top 10 Movies{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="heading">查看电影</h1>
+  <p class="description">查看当前电影</p>
+
+
+  <div class="card">
+    <div class="front" style="background-image: url('{{ data.url }}');">
+      <p class="large"></p>
+    </div>
+    <div class="back">
+      <div>
+        <div class="title">{{data.title}} <span class="release_date">({{data.date}})</span></div>
+        <div class="rating">
+          <label></label>
+          <i class="fas fa-star star"></i>
+        </div>
+        <p class="review">"{{data.overview}}"</p>
+        <p class="overview">
+
+        </p>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container text-center add">
+  <a href="#" class="button">添加影片</a>
+</div>
+
+{% endblock %}

@@ -4,10 +4,11 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="heading">Select Movie</h1>
+  <h1 class="heading">Select Movie</h1>
+  {% for data in datas %}
   <p>
-    <a href="#"> MOVIE TITLE - MOVIE RELEASE DATE</a>
+    <a href="{{ url_for('addscv',data=data)}}">{{data.title}}-{{data.date}}</a>
   </p>
-
+  {% endfor %}
 </div>
 {% endblock %}
