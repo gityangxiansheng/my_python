@@ -14,10 +14,10 @@ def get_title(title):
         # if not x['poster_path'] :
         data={
         'id' : x['id'],
-        'url' : 'https://image.tmdb.org/t/p/original'+ str(x['poster_path']),
-        'date' : x['release_date'],
+        'img_url' : 'https://image.tmdb.org/t/p/original'+ str(x['poster_path']),
+        'year' : x['release_date'],
         'title' : x['title'],
-        'overview' :x['overview']}
+        'description' :x['overview']}
         data_list.append(data)
     return data_list
 if __name__ == "__main__":

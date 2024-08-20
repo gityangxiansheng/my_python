@@ -6,6 +6,7 @@ from wtforms import StringField, FloatField,SubmitField
 from wtforms.validators import DataRequired
 import requests
 from get_title import get_title
+import json
 '''
 Red underlines? Install the required packages first: 
 Open the Terminal in PyCharm (bottom left). 
@@ -40,7 +41,7 @@ class Movie(db.Model):
     year = db.Column(db.String(8),nullable=False)
     description = db.Column(db.String(250))
     rating = db.Column(db.Float)
-    ranking = db.Column(db.String(250),unique=True)
+    ranking = db.Column(db.String(250))
     review = db.Column(db.String(250))
     img_url = db.Column(db.String(250))
     
@@ -49,8 +50,14 @@ with app.app_context():
 
 @app.route("/")
 def home():
-    all_movies = Movie.query.all()    
-    return render_template("index.html",movies=all_movies)
+    result = db.session.execute(db.select(Movie).order_by(Movie.rating))
+    all_movies = result.scalars().all() # convert ScalarResult to Python List
+    all_movies
+    for i in range(len(all_movies)):
+        all_movies[i].ranking = len(all_movies) - i
+    db.session.commit()
+
+    return render_template("index.html", movies=all_movies)
 
 @app.route("/edit",methods=["GET",'POST'])
 def edit():
@@ -87,8 +94,22 @@ def add():
 
 @app.route("/addscv",methods=["POST","GET"])
 def addscv():
-    data = request.args.get("data")
-    return render_template("indexs.html",data = data)
+    if  request.args.get("data"):
+        data = json.loads(request.args.get("data").replace("'", '"'))
+        print(request.method)
+        return render_template("indexs.html",data = data)
+    elif not request.args.get("data"):
+        datas = json.loads(request.args.get("datas").replace("'", '"'))
+        title = datas['title']
+        existing_movie = Movie.query.filter_by(title=title).first()
+        if existing_movie:
+            new_movie_id = existing_movie.id
+        else:
+            new_movie = Movie(title=datas['title'], year=datas['year'], description=datas['description'],img_url=datas['img_url'])
+            db.session.add(new_movie)
+            db.session.commit()
+            new_movie_id = new_movie.id
+        return redirect(url_for("edit", id=new_movie_id))
 
 
 if __name__ == '__main__':
